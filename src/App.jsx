@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import TripForm from './components/TripForm';
 import TripDetails from './components/TripDetails';
+import ELDLogSheet from './components/ELDLogSheet';
 import { planTrip } from './api';
 
 export default function App() {
@@ -11,9 +12,11 @@ export default function App() {
     setLoading(true);
     try {
       const res = await planTrip(data);
-      setTrip(res.data);
+      setTrip(res);
+      console.log("Trip planned successfully:", res);
     } catch (err) {
       alert("Failed to plan trip");
+      console.log(err);
     } finally {
       setLoading(false);
     }
@@ -25,6 +28,7 @@ export default function App() {
       <TripForm onSubmit={handlePlanTrip} />
       {loading && <p>Loading...</p>}
       <TripDetails trip={trip} />
+      {trip && <ELDLogSheet logs={trip.logs} />}
     </div>
   );
 }

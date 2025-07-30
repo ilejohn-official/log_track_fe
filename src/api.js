@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:8000/api/', // Change to Render URL when deployed
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
-export const planTrip = (data) => API.post('plan-trip/', data);
+export const planTrip = (data) => API.post('/api/plan-trip/', data).then(res => res.data);
