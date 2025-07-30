@@ -2,6 +2,12 @@ const ROW_LABELS = ["Off Duty", "Sleeper", "Driving", "On Duty"];
 const HEIGHT = 300;
 const WIDTH = 800;
 const HOURS = 24;
+const STATUS_COLORS = {
+  OffDuty: "#16a34a",   // green
+  Sleeper: "#7c3aed",   // purple
+  Driving: "#2563eb",   // blue
+  OnDuty: "#f97316"     // orange
+};
 
 export default function ELDLogSheet({ logs }) {
   if (!logs || logs.length === 0) return null;
@@ -61,6 +67,7 @@ export default function ELDLogSheet({ logs }) {
               const y = entry.y_position * rowHeight + rowHeight / 2;
               const x1 = entry.start * hourWidth;
               const x2 = entry.end * hourWidth;
+              const strokeColor = STATUS_COLORS[entry.status];
 
               // Draw vertical connector at the start (except for the first entry)
               if (i > 0) {
@@ -75,7 +82,7 @@ export default function ELDLogSheet({ logs }) {
                       y1={prevY}
                       x2={connectorX}
                       y2={y}
-                      stroke="#1f2937"
+                      stroke={strokeColor}
                       strokeWidth={2}
                     />
                     {/* Horizontal bar */}
@@ -84,7 +91,7 @@ export default function ELDLogSheet({ logs }) {
                       y1={y}
                       x2={x2}
                       y2={y}
-                      stroke="#1f2937"
+                      stroke={strokeColor}
                       strokeWidth={3}
                     />
                   </g>
@@ -97,7 +104,7 @@ export default function ELDLogSheet({ logs }) {
                   y1={y}
                   x2={x2}
                   y2={y}
-                  stroke="#1f2937"
+                  stroke={strokeColor}
                   strokeWidth={3}
                 />
               );

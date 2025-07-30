@@ -1,14 +1,15 @@
 export default function TripDetails({ trip }) {
-  if (!trip) return null;
   return (
-    <div className="p-4 bg-gray-100 rounded-lg mt-4">
-      <h2 className="text-lg font-bold">Trip Summary</h2>
-      <p><b>Total Miles:</b> {trip.total_miles}</p>
-      <p><b>Total Days:</b> {trip.total_days}</p>
-      <h3 className="mt-2 font-semibold">Stops</h3>
-      <ul className="list-disc ml-5">
+    <div>
+      <h2 className="text-xl font-bold mb-4">Trip Summary</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+        <p><strong>Total Miles:</strong> {trip.total_miles.toFixed(2)}</p>
+        <p><strong>Total Days:</strong> {trip.total_days}</p>
+      </div>
+      <h3 className="text-lg font-semibold mb-2">Stops</h3>
+      <ul className="list-disc ml-5 space-y-1">
         {trip.stops.map((s, i) => (
-          <li key={i}>{s.stop_type} - {s.name}</li>
+          <li key={i} className="capitalize">{s.stop_type} - {s.name}</li>
         ))}
       </ul>
     </div>
