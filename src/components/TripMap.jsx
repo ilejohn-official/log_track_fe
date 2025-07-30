@@ -29,10 +29,12 @@ function FitBounds({ positions }) {
   return null;
 }
 
-export default function TripMap({ stops }) {
-  if (!stops || stops.length === 0) return null;
+export default function TripMap({ trip }) {
+  if (!trip || !trip.stops || trip.stops.length === 0) return null;
 
+  const stops = trip.stops;
   const positions = stops.map(s => [s.latitude, s.longitude]);
+  const routeLine = trip.route_points || positions;
 
   return (
     <div className="p-4 bg-white rounded shadow-md mt-4">
@@ -54,8 +56,8 @@ export default function TripMap({ stops }) {
             </Popup>
           </Marker>
         ))}
-        <Polyline positions={positions} color="blue" />
-        <FitBounds positions={positions} />
+        <Polyline positions={routeLine} color="blue" weight={4} opacity={0.8} />
+        <FitBounds positions={routeLine} />
       </MapContainer>
     </div>
   );

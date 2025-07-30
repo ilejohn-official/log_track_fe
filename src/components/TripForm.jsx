@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 
-export default function TripForm({ onSubmit }) {
+export default function TripForm({ onSubmit, disabled }) {
   const { register, handleSubmit } = useForm();
 
   return (
@@ -22,7 +22,11 @@ export default function TripForm({ onSubmit }) {
         <input type="number" {...register('current_cycle_used')} min="0" max="70" className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required />
       </div>
       <div className="md:col-span-2">
-        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition">
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={disabled}
+        >
           Plan Trip
         </button>
       </div>

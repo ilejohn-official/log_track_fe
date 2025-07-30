@@ -33,7 +33,7 @@ export default function App() {
         {/* Form */}
         <div className="bg-white shadow-lg rounded-lg p-6">
           <h2 className="text-xl font-semibold mb-4">Plan Your Trip</h2>
-          <TripForm onSubmit={handlePlanTrip} />
+          <TripForm onSubmit={handlePlanTrip} disabled={loading} />
           {loading && <p className="mt-4 text-blue-500">Calculating trip...</p>}
         </div>
 
@@ -47,7 +47,7 @@ export default function App() {
         {/* Map */}
         {trip && (
           <div className="bg-white shadow-lg rounded-lg p-6">
-            <TripMap stops={trip.stops} />
+            <TripMap trip={trip} />
           </div>
         )}
 
